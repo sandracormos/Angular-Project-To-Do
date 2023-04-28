@@ -1,0 +1,48 @@
+<div class="divs" id="titleDiv">Welcome</div>
+<section>
+    <div class="example-button-row">
+      <button mat-button (click)="showMoreButtons()" color="primary">Show more</button>
+      <button mat-button (click)="showLessButtons()" color="accent">Show less</button>
+    </div>
+  </section>
+  <mat-divider></mat-divider>
+  <section *ngIf="showSecondRow === true">
+    <div class="description">Info suplimentare</div>
+    <div class="description-text">
+        Introducing the ultimate solution to help you stay organized and achieve your goals - our powerful to-do list site! With our 
+        platform, you can easily create and manage your to-do lists online, ensuring that you stay on top of your tasks and deadlines. 
+        Say goodbye to the stress and overwhelm of a cluttered schedule, and hello to increased productivity and efficiency. Our site is 
+        user-friendly and intuitive, 
+        making it easy to prioritize your tasks and track your progress. Start achieving your goals today with our to-do list site!
+    </div>
+  </section>
+  
+  <br><br><br><br>
+
+<div class="todos">
+    <mat-form-field class="example-form-field">
+        <mat-label>Enter Task</mat-label>
+        <input matInput type="text" [(ngModel)]="newTask">
+        <button *ngIf="inputTodo" matSuffix mat-icon-button aria-label="Clear" (click)="inputTodo=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    <button class="add"(click)="addTodo()">Add</button>
+</div>
+
+<div class="todos" *ngFor="let todo of todos; let i = index;" class="todo-item todo {{ todo.completed ? 'done' : ''}}">
+        <div class="id">{{ i }}</div>&nbsp;
+        <div class="id">{{ inputTodo }}</div>&nbsp;
+        <div class="content" (click)='toggleDone(i)'>{{ todo.content }}</div>
+        <button class="delete" (click)="deleteTodo(i)">Remove</button>
+    
+    </div>
+     
+  <section>
+    <button (click)="getTasks()" mat-raised-button>Get tasks</button>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let todo of tasksFromDB">
+        {{todo.content}}
+      </mat-list-item>
+    </mat-list>
+  </section>
